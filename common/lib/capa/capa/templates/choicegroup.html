@@ -1,15 +1,20 @@
-<form class="choicegroup capa_inputtype" id="inputtype_${id}">
+<form class="choicegroup capa_inputtype" id="inputtype_${id}" role="application">
     <div class="indicator_container">
     % if input_type == 'checkbox' or not value:
-        % if status == 'unsubmitted' or show_correctness == 'never':
-        <span class="unanswered" style="display:inline-block;" id="status_${id}"></span>
-        % elif status == 'correct':
-        <span class="correct" id="status_${id}"><span class="sr">Status: correct</span></span>
-        % elif status == 'incorrect':
-        <span class="incorrect" id="status_${id}"><span class="sr">Status: incorrect</span></span>
-        % elif status == 'incomplete':
-        <span class="incorrect" id="status_${id}"><span class="sr">Status: incomplete</span></span>
-        % endif
+        <% 
+        if status == 'unsubmitted' or show_correctness == 'never':
+            classname = 'unanswered'
+        elif status == 'incomplete':
+            classname = 'incorrect'
+        else:
+            classname = status
+        %>
+    
+        % if classname == 'unanswered':
+        <span class="${classname}" style="display:inline-block;" id="status_${id}"></span>
+        % else:
+        <span class="${classname}" id="status_${id}"><span class="sr" aria-live="polite" aria-describedby="inputtype_${id}">${value} – ${status}</span></span>
+        % endif:
     % endif
     </div>
 
@@ -52,12 +57,12 @@
                     correctness = None
             %>
             % if correctness and not show_correctness=='never':
-            <span class="sr" aria-describedby="input_${id}_${choice_id}">Status: ${correctness}</span>
+            <span class="sr" aria-describedby="input_${id}_${choice_id}" aria-live="polite">${value|h} – ${correctness}</span>
             % endif
             % endif
         </label>
         % endfor
-        <span id="answer_${id}"></span>
+        <span id="answer_${id}" aria-live="assertive"></span>
     </fieldset>
 
     % if show_correctness == "never" and (value or status not in ['unsubmitted']):

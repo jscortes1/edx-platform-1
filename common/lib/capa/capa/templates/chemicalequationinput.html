@@ -17,7 +17,8 @@
    % endif
    />
 
-      <p class="status" aria-describedby="input_${id}">
+      <p class="status" aria-describedby="input_${id}" aria-live="polite">
+        ${value|h} –
         % if status == 'unsubmitted':
         unanswered
         % elif status == 'correct':

@@ -9,13 +9,13 @@
         % endif
         />
 
-      <p class="status">${reported_status}</p>
+      <p class="status" aria-live="polite">${value|h} – ${reported_status}</p>
 
       <div id="input_${id}_preview" class="equation">
         \[\]
         <img src="${STATIC_URL}images/spinner.gif" class="loading"/>
       </div>
-    <p id="answer_${id}" class="answer"></p>
+    <p id="answer_${id}" class="answer" aria-live="assertive"></p>
   </div>
 
   <div class="script_placeholder" data-src="${previewer}"/>
