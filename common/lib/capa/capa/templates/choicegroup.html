@@ -1,4 +1,4 @@
-<form class="choicegroup capa_inputtype" id="inputtype_${id}" role="application">
+<form class="choicegroup capa_inputtype" id="inputtype_${id}">
     <div class="indicator_container">
     % if input_type == 'checkbox' or not value:
         <% 
@@ -13,7 +13,7 @@
         % if classname == 'unanswered':
         <span class="${classname}" style="display:inline-block;" id="status_${id}"></span>
         % else:
-        <span class="${classname}" id="status_${id}"><span class="sr" aria-live="polite" aria-describedby="inputtype_${id}">${value} – ${status}</span></span>
+        <span class="${classname}" id="status_${id}" aria-describedby="inputtype_${id}"><span class="sr">${value} – ${status}</span></span>
         % endif:
     % endif
     </div>
@@ -37,14 +37,16 @@
             % endif
             % endif
             >
-            <input type="${input_type}" name="input_${id}${name_array_suffix}" id="input_${id}_${choice_id}" aria-role="radio" aria-describedby="answer_${id}" value="${choice_id}"
+            <input type="${input_type}" name="input_${id}${name_array_suffix}" id="input_${id}_${choice_id}" aria-role="${input_type}" aria-describedby="answer_${id}" value="${choice_id}"
             ## If the student selected this choice...
             % if input_type == 'radio' and ( (isinstance(value, basestring) and (choice_id == value))  or  (not isinstance(value, basestring) and choice_id in value) ):
             checked="true"
             % elif input_type != 'radio' and choice_id in value:
             checked="true"
             % endif
-
+            % if input_type != 'radio':
+            aria-multiselectable="true"
+            % endif
             /> ${choice_description}
 
             % if input_type == 'radio' and ( (isinstance(value, basestring) and (choice_id == value))  or  (not isinstance(value, basestring) and choice_id in value) ):
@@ -57,7 +59,7 @@
                     correctness = None
             %>
             % if correctness and not show_correctness=='never':
-            <span class="sr" aria-describedby="input_${id}_${choice_id}" aria-live="polite">${value|h} – ${correctness}</span>
+            <span class="sr" aria-describedby="input_${id}_${choice_id}">${value|h} – ${correctness}</span>
             % endif
             % endif
         </label>
