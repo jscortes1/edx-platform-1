@@ -278,8 +278,8 @@ class @Problem
           @updateProgress response
           if @el.hasClass 'showed'
             @el.removeClass 'showed'
-          window.SR.readElts($(response.contents).find('.status'))
           @$('div.action input.check').focus()
+          window.SR.readElts($(response.contents).find('.status'))
         else
           @gentle_alert response.success
       Logger.log 'problem_graded', [@answers, response.contents], @id
@@ -289,6 +289,8 @@ class @Problem
     $.postWithPrefix "#{@url}/problem_reset", id: @id, (response) =>
         @render(response.html)
         @updateProgress response
+        # focus on the nearest input?
+        @$('div.action input.check').focus()
 
   # TODO this needs modification to deal with javascript responses; perhaps we
   # need something where responsetypes can define their own behavior when show
@@ -298,15 +300,18 @@ class @Problem
       Logger.log 'problem_show', problem: @id
       $.postWithPrefix "#{@url}/problem_show", (response) =>
         answers = response.answers
+        sr_answer = ''
         $.each answers, (key, value) =>
+          sr_answer += ($("#input_#{key}").attr('aria-label') or '') + ' - '
           if $.isArray(value)
             for choice in value
               @$("label[for='input_#{key}_#{choice}']").attr correct_answer: 'true'
+            sr_answer += "\n".join(value)
           else
             answer = @$("#answer_#{key}, #solution_#{key}")
             answer.html(value)
             Collapsible.setCollapsibles(answer)
-
+            sr_answer += answer.text() + "\n"
         # TODO remove the above once everything is extracted into its own
         # inputtype functions.
 
@@ -322,15 +327,16 @@ class @Problem
             MathJax.Hub.Queue ["Typeset", MathJax.Hub, element]
 
         `// Translators: the word Answer here refers to the answer to a problem the student must solve.`
-        @$('.show-label').text gettext('Hide Answer(s)')
+        @$('.show-label').text gettext('Hide Answers')
         @el.addClass 'showed'
         @updateProgress response
+        SR.readText(sr_answer)
     else
       @$('[id^=answer_], [id^=solution_]').text ''
       @$('[correct_answer]').attr correct_answer: null
       @el.removeClass 'showed'
       `// Translators: the word Answer here refers to the answer to a problem the student must solve.`
-      @$('.show-label').text gettext('Show Answer(s)')
+      @$('.show-label').text gettext('Show Answers')
 
       @el.find(".capa_inputtype").each (index, inputtype) =>
         display = @inputtypeDisplays[$(inputtype).attr('id')]

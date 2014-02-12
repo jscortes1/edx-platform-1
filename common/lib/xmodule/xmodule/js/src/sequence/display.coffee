@@ -114,7 +114,7 @@ class @Sequence
       sequence_links = @content_container.find('a.seqnav')
       sequence_links.click @goto
       # Focus on the first available xblock.
-      @content_container.find('.vert .xblock :first').focus()
+      # @content_container.find('.vert .xblock :first').attr('tabindex', '0').focus()
     @$("a.active").blur()  
     
   goto: (event) =>

@@ -233,7 +233,7 @@ div.course-wrapper {
 }
 
 .xblock {
-  &:focus {
+  &:focus,&:active {
     outline: 0;
   }
 }

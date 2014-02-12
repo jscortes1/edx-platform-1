@@ -1,4 +1,4 @@
-<section id="chemicalequationinput_${id}" class="chemicalequationinput">
+<div id="chemicalequationinput_${id}" class="chemicalequationinput">
     <div class="script_placeholder" data-src="${previewer}"/>
 
     % if status == 'unsubmitted':
@@ -11,13 +11,13 @@
     <div class="incorrect" id="status_${id}">
     % endif
 
-    <input type="text" name="input_${id}" id="input_${id}" aria-label="${label}" aria-describedby="answer_${id}" data-input-id="${id}" value="${value|h}"
+    <input type="text" name="input_${id}" id="input_${id}" aria-label="${label}" role="math" aria-describedby="answer_${id}" data-input-id="${id}" value="${value|h}"
    % if size:
    size="${size}"
    % endif
    />
 
-      <p class="status" aria-describedby="input_${id}" aria-live="polite" aria-atomic="true">
+      <p class="status" aria-describedby="input_${id}" aria-hidden="true">
         ${value|h} –
         % if status == 'unsubmitted':
         unanswered
@@ -30,11 +30,10 @@
         % endif
       </p>
 
-      <div id="input_${id}_preview" class="equation">
-      </div>
+      <div id="input_${id}_preview" class="equation" role="math"></div>
   <p id="answer_${id}" class="answer"></p>
 
 % if status in ['unsubmitted', 'correct', 'incorrect', 'incomplete']:
 </div>
 % endif
-</section>
+</div>

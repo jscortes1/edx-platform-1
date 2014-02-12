@@ -11,9 +11,9 @@
         %>
     
         % if classname == 'unanswered':
-        <span class="${classname}" style="display:inline-block;" id="status_${id}"></span>
+        <span class="status ${classname}" style="display:inline-block;" id="status_${id}"></span>
         % else:
-        <span class="${classname}" id="status_${id}" aria-describedby="inputtype_${id}"><span class="sr">${value} – ${status}</span></span>
+        <span class="status ${classname}" id="status_${id}" aria-describedby="inputtype_${id}"><span class="sr">${value} – ${status}</span></span>
         % endif:
     % endif
     </div>
@@ -59,12 +59,12 @@
                     correctness = None
             %>
             % if correctness and not show_correctness=='never':
-            <span class="sr" aria-describedby="input_${id}_${choice_id}">${value|h} – ${correctness}</span>
+            <span class="sr status" aria-describedby="input_${id}_${choice_id}">${choice_description|h} – ${correctness}</span>
             % endif
             % endif
         </label>
         % endfor
-        <span id="answer_${id}" aria-live="assertive"></span>
+        <span id="answer_${id}" aria-hidden="true"></span>
     </fieldset>
 
     % if show_correctness == "never" and (value or status not in ['unsubmitted']):

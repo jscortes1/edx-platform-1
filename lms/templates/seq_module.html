@@ -19,11 +19,11 @@
            data-element="${idx+1}"
            href="javascript:void(0);"
            title="${item['title']|h}"
-           aria-controls="seq_contents_${idx}"
+           aria-controls="seq_contents"
            id="tab_${idx}"
            tabindex="0"
            role="tab">
-            <p aria-hidden="false">${item['title']}<span class="sr" aria-hidden="true">, ${item['type']}</span></p>
+            <p>${item['title']}</p>
           </a>
         </li>
         % endfor
@@ -43,7 +43,7 @@
      ${item['content'] | h}
   </div>
   % endfor
-  <div id="seq_content" role="tabpanel"></div>
+  <div id="seq_content" role="tabpanel main"></div>
 
   <nav class="sequence-bottom">
     <ul aria-label="${_('Section Navigation')}" class="sequence-nav-buttons">

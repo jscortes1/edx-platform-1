@@ -5,19 +5,19 @@
         <% element_checked = True %>
     %endif
 %endfor
-<section id="choicetextinput_${id}" class="choicetextinput">
+<div id="choicetextinput_${id}" class="choicetextinput">
 <form class="choicetextgroup capa_inputtype" id="inputtype_${id}">
     <div class="script_placeholder" data-src="/static/js/capa/choicetextinput.js"/>
     <div class="indicator_container">
     % if input_type == 'checkbox' or not element_checked:
         % if status == 'unsubmitted':
-        <span class="unanswered" style="display:inline-block;" id="status_${id}"></span>
+        <span class="status unanswered" style="display:inline-block;" id="status_${id}"></span>
         % elif status == 'correct':
-        <span class="correct" id="status_${id}"></span>
+        <span class="status correct" id="status_${id}"></span>
         % elif status == 'incorrect':
-        <span class="incorrect" id="status_${id}"></span>
+        <span class="status incorrect" id="status_${id}"></span>
         % elif status == 'incomplete':
-        <span class="incorrect" id="status_${id}"></span>
+        <span class="status incorrect" id="status_${id}"></span>
         % endif
     % endif
     </div>
@@ -62,7 +62,7 @@
                 </span>
 
             % endfor
-            <p id="answer_${choice_id}" class="answer"></p>
+            <p id="answer_${choice_id}" class="answer" aria-hidden="true"></p>
                 </section>
 
         % endfor
@@ -73,4 +73,4 @@
     <div class="capa_alert">${submitted_message}</div>
     %endif
 </form>
-</section>
+</div>

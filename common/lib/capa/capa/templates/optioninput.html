@@ -22,7 +22,7 @@ elif status == 'incomplete':
 else:
     classname = status
 %>
-  <span class="${classname}" 
+  <span class="status ${classname}" 
       %if status == 'unsubmitted':
       style="display:inline-block;"
       %endif
