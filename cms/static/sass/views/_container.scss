@@ -1,10 +1,10 @@
-// container - content
+// studio - views - container
 // ==========================
 // The container view renders xblocks three levels deep: Page Level, Nesting Level, and Element Level.
 
 // For containers rendered at the element level, the container is rendered in a way that allows the user to navigate to a separate container page for that container making its children populate the nesting and element levels.
 
-// UI: Container Page View
+// UI: container page view
 body.view-container {
 
   .mast {
@@ -29,86 +29,161 @@ body.view-container {
   }
 }
 
-// UI: xBlock Page Level
-body.view-container {
-  .xblock-wrapper-pagelevel {
-    margin: 0;
+// UI: xblock rendering
+body.view-container  .content-primary{
 
-    .xblock-header {
-      display: none;
+  .wrapper-xblock {
 
-      .xblock-details {
-        font-size: 1.1em;
+    // CASE: page level xblock rendering
+    &.level-page {
+      @include wrap-xblock;
+      margin: 0;
+
+      .xblock-header {
+        display: none;
       }
     }
 
-    .xblock-render {
-      background: none;
-    }
-  }
-
-  // UI: xBlock Nesting Level
-  .xblock-wrapper-nestinglevel {
-    margin: ($baseline/2);
-    border: none;
-    padding-bottom: $baseline;
-    box-shadow: none;
-
-    &:hover {
-      background-color: $gray-l7;
-      box-shadow: 0 0 1px $shadow-d2 inset;
-    }
-
-    .xblock-header {
-      display: flex;
-      margin-bottom: ($baseline/2);
-      border-bottom: none;
-      background: none;
+    // CASE: nesting level xblock rendering
+    &.level-nesting {
+      @include wrap-xblock;
+      border: none;
+      padding-bottom: $baseline;
       box-shadow: none;
 
-      .xblock-details {
-        font-size: 1em;
+      &:hover {
+        @include transition(all $tmg-f2 linear 0s);
+        background-color: $gray-l7;
+        box-shadow: 0 0 1px $shadow-d2 inset;
+      }
+
+      .xblock-header {
+        margin-bottom: ($baseline/2);
+        border-bottom: none;
+        background: none;
       }
     }
-  }
 
-  // UI: xBlock Element Level
-  .xblock-wrapper-elementlevel {
-    margin: 0 ($baseline*2) $baseline ($baseline*2);
-    border-radius: ($baseline/4);
-    background-color: $white;
-    box-shadow: none;
+    // CASE: element level xblock rendering
+    &.level-element {
+      @include wrap-xblock;
+      margin: 0 ($baseline*2) $baseline ($baseline*2);
+      box-shadow: none;
 
-    &:hover {
-      @include transition(all $tmg-f2 linear 0s);
-      border-color: $blue;
-      box-shadow: 0 0 1px $shadow-d1;
-    }
-
-    .xblock-header {
-      margin-bottom: 0;
-      border-bottom: 1px solid $gray-l4;
-      background-color: $gray-l6;
-      font-weight: 300;
-      font-size: .9em;
-    }
-
-    // STATE: xBlock containers styled as rows, similarly to on unit page.
-    &.xblock-type-container {
+      &:hover {
+        @include transition(all $tmg-f2 linear 0s);
+        border-color: $blue;
+      }
 
       .xblock-header {
         margin-bottom: 0;
-        border-bottom: 0;
-        border-radius: ($baseline/5);
-
-        .xblock-details {
-          font-size: .9em;
-        }
+        font-weight: 300;
+        font-size: .9em;
       }
 
       .xblock-render {
-        display: none;
+        margin: $baseline;
+      }
+
+      // STATE: xBlock containers styled as rows.
+      &.xblock-type-container {
+
+        .xblock-header {
+          margin-bottom: 0;
+          border-bottom: 0;
+          border-radius: ($baseline/5);
+
+          .xblock-details {
+            font-size: .9em;
+          }
+        }
+
+        .xblock-render {
+          display: none;
+        }
       }
     }
   }
 }
+
+//   .xblock-wrapper-pagelevel {
+//     margin: 0;
+
+//     .xblock-header {
+//       display: none;
+
+//       .xblock-details {
+//         font-size: 1.1em;
+//       }
+//     }
+
+//     .xblock-render {
+//       background: none;
+//     }
+//   }
+
+//   // UI: xBlock Nesting Level
+//   .xblock-wrapper-nestinglevel {
+//     margin: ($baseline/2);
+//     border: none;
+//     padding-bottom: $baseline;
+//     box-shadow: none;
+
+//     &:hover {
+//       background-color: $gray-l7;
+//       box-shadow: 0 0 1px $shadow-d2 inset;
+//     }
+
+//     .xblock-header {
+//       display: flex;
+//       margin-bottom: ($baseline/2);
+//       border-bottom: none;
+//       background: none;
+//       box-shadow: none;
+
+//       .xblock-details {
+//         font-size: 1em;
+//       }
+//     }
+//   }
+
+//   // UI: xBlock Element Level
+//   .xblock-wrapper-elementlevel {
+//     margin: 0 ($baseline*2) $baseline ($baseline*2);
+//     border-radius: ($baseline/4);
+//     background-color: $white;
+//     box-shadow: none;
+
+//     &:hover {
+//       @include transition(all $tmg-f2 linear 0s);
+//       border-color: $blue;
+//       box-shadow: 0 0 1px $shadow-d1;
+//     }
+
+//     .xblock-header {
+//       margin-bottom: 0;
+//       border-bottom: 1px solid $gray-l4;
+//       background-color: $gray-l6;
+//       font-weight: 300;
+//       font-size: .9em;
+//     }
+
+//     // STATE: xBlock containers styled as rows, similarly to on unit page.
+//     &.xblock-type-container {
+
+//       .xblock-header {
+//         margin-bottom: 0;
+//         border-bottom: 0;
+//         border-radius: ($baseline/5);
+
+//         .xblock-details {
+//           font-size: .9em;
+//         }
+//       }
+
+//       .xblock-render {
+//         display: none;
+//       }
+//     }
+//   }
+// }

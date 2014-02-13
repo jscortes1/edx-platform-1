@@ -1352,6 +1352,7 @@ div.wrapper-comp-editor.is-inactive ~ div.launch-latex-compiler{
 // xblock - unit page container
 
 body.unit .xblock-type-container {
+  @include wrap-xblock;
   margin: 0px;
 
   &:hover {

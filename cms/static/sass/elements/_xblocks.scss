@@ -1,13 +1,14 @@
-// xblocks - default styling
+// studio - elements - xblock rendering
 // ==========================
 
-// UI: xblock wrapper
-.xblock-wrapper {
+// mixins - UI archetypes - xblock rendering
+@mixin wrap-xblock {
   margin: ($baseline/2);
   border: 1px solid $gray-l4;
   border-radius: ($baseline/5);
   background: $white;
   box-shadow: 0px 1px 1px $shadow-l1;
+
 
   &:hover {
     box-shadow: 0 0 1px $shadow;
@@ -46,13 +47,60 @@
   }
 }
 
+// UI: xblock wrapper
+// .xblock-wrapper {
+//   margin: ($baseline/2);
+//   border: 1px solid $gray-l4;
+//   border-radius: ($baseline/5);
+//   background: $white;
+//   box-shadow: 0px 1px 1px $shadow-l1;
+
+//   &:hover {
+//     box-shadow: 0 0 1px $shadow;
+//   }
+
+//   // UI: xblock header
+//   .xblock-header {
+//     @include box-sizing(border-box);
+//     display: flex;
+//     border-bottom: 1px solid $gray-l4;
+//     border-radius: ($baseline/5) ($baseline/5) 0 0;
+//     min-height: ($baseline*2.5);
+//     background-color: $gray-l6;
+//     align-items: center;
+
+//     .header-details {
+//       @extend %cont-truncated;
+//       display: flex;
+//       padding-left: flex-gutter();
+//       width: flex-grid(6,12);
+//       vertical-align: top;
+//       justify-content: flex-start;
+//     }
+
+//     .header-actions {
+//       display: flex;
+//       width: flex-grid(6,12);
+//       vertical-align: top;
+//       justify-content: flex-end;
+//     }
+//   }
+
+//   // UI: xblock render
+//   .xblock-render {
+//     @extend %anim-fadeIn;
+//   }
+// }
+
+// ====================
+
 // UI: xblocks - calls-to-action
-.xblock-wrapper .header-actions {
+.wrapper-xblock .header-actions {
   @extend %actions-header;
 }
 
 // UI: xblock is collapsible
-.xblock-wrapper.is-collapsible {
+.wrapper-xblock.is-collapsible {
 
   .expand-collapse {
     @extend %expand-collapse;
