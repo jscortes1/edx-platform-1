@@ -10,9 +10,9 @@
         % endif
         />
 
-      <p class="status" aria-hidden="true">${value|h} – ${reported_status}</p>
+      <p class="status" aria-hidden="true"><span class="sr equation">${value|h}</span> – ${reported_status}</p>
 
-      <div id="input_${id}_preview" class="equation" role="math">
+      <div id="input_${id}_preview" class="equation">
         \[\]
         <img src="${STATIC_URL}images/spinner.gif" class="loading"/>
       </div>

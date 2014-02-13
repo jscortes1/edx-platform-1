@@ -7,7 +7,7 @@ class SRAlert
   readElts: (elts) ->
     feedback = ''
     $.each elts, (idx, value) =>
-      feedback += '<p>' + $(value).text() + '</p>\n'
+      feedback += '<p>' + $(value).html() + '</p>\n'
     @el.html(feedback)
 
   readText: (text) ->
