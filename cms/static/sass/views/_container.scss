@@ -12,16 +12,18 @@ body.view-container {
     padding-bottom: 0;
   }
 
-  .content-primary {
+  .content-primary, .content-supplementary {
+    @include box-sizing(border-box);
     float: left;
-    clear: both;
-    width: 70%;
+  }
+
+  .content-primary {
+    margin-right: flex-gutter();
+    width: flex-grid(9,12);
   }
 
   .content-supplementary {
-    float: right;
-    padding: $baseline;
-    width: 28%;
+    width: flex-grid(3,12);
 
     label {
       @extend %t-title8;
